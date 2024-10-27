@@ -1,0 +1,43 @@
+---
+const DATES = [
+  { day: 'Jueves', date: 15, month: 'Agosto', active: true },
+  { day: 'Viernes', date: 16, month: 'Agosto', active: false },
+  { day: 'Sábado', date: 17, month: 'Agosto', active: false },
+  { day: 'Domingo', date: 18, month: 'Agosto', active: false },
+  { day: 'Lunes', date: 19, month: 'Agosto', active: false },
+  { day: 'Martes', date: 20, month: 'Agosto', active: false },
+  { day: 'Miércoles', date: 21, month: 'Agosto', active: false },
+]
+---
+
+<ul
+  class='flex gap-3 items-center overflow-x-hidden p-1'
+  data-target='date-filter-list'
+>
+  {
+    DATES.map(({ day, date, month, active }) => (
+      <li>
+        <article
+          class:list={[
+            'border border-gray-200 flex items-center gap-2 p-3 rounded-3xl hover:shadow hover:bg-black/5 transition-colors select-none',
+            active && 'bg-black text-white hover:bg-black',
+          ]}
+        >
+          <span class='text-sm'>{day}</span>
+          <span class='font-bold text-5xl'>{date}</span>
+          <span class='text-sm'>{month}</span>
+        </article>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  import { enableSmoothHorizontalScroll } from '../utils/horizontalScroll'
+
+  const dateFilterList = document.querySelector(
+    '[data-target="date-filter-list"]',
+  )! as HTMLUListElement
+
+  enableSmoothHorizontalScroll(dateFilterList)
+</script>
