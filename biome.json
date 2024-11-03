@@ -15,6 +15,9 @@
 			}
 		}
 	},
+	"formatter": {
+		"formatWithErrors": true
+	},
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "single",
@@ -28,16 +31,16 @@
 		}
 	},
 	"overrides": [
-    {
-      "include": ["*.astro"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          }
-        }
-      }
-    }
-  ]
+		{
+			"include": ["*.astro"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	]
 }
