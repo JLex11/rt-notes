@@ -18,7 +18,6 @@ export const setSearch = (search: string) => {
 }
 
 export const setType = (type: NoteFilters['type']) => {
-  console.log(type)
   noteFilters.set({ ...noteFilters.get(), type })
 }
 
