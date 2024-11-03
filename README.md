@@ -37,15 +37,27 @@ RT Notes es una aplicación para gestionar notas, recordatorios y tareas. Está 
 │   ├── consts.ts
 │   ├── env.d.ts
 │   ├── hooks/
+│   │   ├── useScreenColumns.ts
 │   ├── icons/
+│   │   ├── FilterIcon.astro
 │   ├── layouts/
+│   │   ├── Layout.astro
 │   ├── mocks/
+│   │   ├── notes.ts
+│   ├── pages/
+│   │   ├── index.astro
+│   ├── store/
+│   │   ├── notes.ts
+│   │   ├── notesFilters.ts
+│   ├── utils/
+│   │   ├── calendarDates.ts
+│   │   ├── cn.ts
+│   │   ├── helpers.ts
+│   │   ├── horizontalScroll.ts
+│   │   ├── rtf.ts
+│   ├── types.d.ts
 │   ├── noteContentMock.ts
 │   ├── noteTypes.ts
-│   ├── pages/
-│   ├── store/
-│   ├── types.d.ts
-│   ├── utils/
 ├── tailwind.config.mjs
 ├── tsconfig.json
 ```
