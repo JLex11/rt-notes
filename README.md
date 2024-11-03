@@ -1,54 +1,117 @@
-# Astro Starter Kit: Basics
+# RT Notes
 
-```sh
-npm create astro@latest -- --template basics
-```
+![Project Logo](path/to/your/logo.png)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+RT Notes es una aplicación para gestionar notas, recordatorios y tareas. Está construida con Astro, Preact y Tailwind CSS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura del Proyecto
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
+```plaintext
+.
+├── .astro/
+│   ├── settings.json
+│   ├── types.d.ts
+├── .gitignore
+├── .idea/
+│   ├── .gitignore
+│   ├── modules.xml
+│   ├── rt-notes.iml
+│   ├── vcs.xml
+│   ├── workspace.xml
+├── .vscode/
+│   ├── extensions.json
+│   ├── launch.json
+│   ├── settings.json
+├── astro.config.mjs
+├── biome.json
+├── bun.lockb
+├── package.json
 ├── public/
-│   └── favicon.svg
+├── README.md
 ├── src/
 │   ├── components/
-│   │   └── Card.astro
+│   │   ├── CommandMenu.tsx
+│   │   ├── DateFilterList.astro
+│   │   ├── FilterBar.astro
+│   │   ├── NoteList.tsx
+│   ├── consts.ts
+│   ├── env.d.ts
+│   ├── hooks/
+│   ├── icons/
 │   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── mocks/
+│   ├── noteContentMock.ts
+│   ├── noteTypes.ts
+│   ├── pages/
+│   ├── store/
+│   ├── types.d.ts
+│   ├── utils/
+├── tailwind.config.mjs
+├── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Instalación
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. Clona el repositorio:
+  
+  ```bash
+  git clone https://github.com/tu-usuario/rt-notes.git
+  ```
 
-Any static assets, like images, can be placed in the `public/` directory.
+2. Navega al directorio del proyecto:
+  
+  ```bash
+  cd rt-notes
+  ```
 
-## 🧞 Commands
+3. Instala las dependencias:
+  
+  ```bash
+  bun install
+  ```
 
-All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Scripts Disponibles
 
-## 👀 Want to learn more?
+- `dev`: Inicia el servidor de desarrollo.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+  ```bash
+  bun dev
+  ```
+
+- `build`: Compila el proyecto para producción.
+  
+  ```bash
+  bun build
+  ```
+
+- `preview`: Previsualiza la compilación de producción.
+
+  ```bash
+  bun preview
+  ```
+## Uso
+
+Para iniciar la aplicación en modo desarrollo, ejecuta:
+  
+  ```bash
+  bun dev
+  ```
+Luego, abre tu navegador y navega a `http://localhost:3000`
+
+## Estructura de Componentes
+- **DateFilterList**: Componente para filtrar notas por fecha.
+- **FilterBar**: Barra de filtros para las notas.
+- **NoteList**: Lista de notas, renderizada en columnas.
+- **NotesTypeFilters**: Filtros por tipo de nota.
+
+## Configuración de Tailwind CSS
+El archivo de configuración de Tailwind CSS se encuentra en `tailwind.config.mjs` y está configurado para escanear todos los archivos en src con las extensiones `.astro`, `.html`, `.js`, `.jsx`, `.md`, `.mdx`, `.svelte`, `.ts`, `.tsx`, y `.vue`.
+
+## Contribuciones
+Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request para discutir cualquier cambio que desees realizar.
+
+## Licencia
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+
+(Project Screenshot)
