@@ -1,15 +1,19 @@
 import { useStore } from "@nanostores/preact"
+import { useMemo } from "preact/hooks"
 import { NOTES_TYPES } from "../consts"
-import { getRTF } from "../utils/rtf"
+import useScreenColumns from "../hooks/useScreenColumns"
 import { notes as notesStore } from "../store/notes"
 import { noteFilters } from "../store/notesFilters"
 import cn from "../utils/cn"
+import { partitionByColumns } from "../utils/helpers"
+import { getRTF } from "../utils/rtf"
 
 export default function NoteList() {
   const notes = useStore(notesStore)
   const notesFilters = useStore(noteFilters)
+  const columns = useScreenColumns({ initialColumns: 5 })
 
-  const filteredNotesIds = notes.filter(note => {
+  const filteredNotesIds = useMemo(() => notes.filter(note => {
     const search = notesFilters.search.toLowerCase()
     const type = notesFilters.type
     const date = notesFilters.date
@@ -21,24 +25,20 @@ export default function NoteList() {
       (type === null || note.type === type) &&
       (date === null || note.date === date)
     )
-  }).map(note => note.id)
+  }).map(note => note.id), [notes, notesFilters])
 
   const isFiltered = (noteId: number) => {
     return !filteredNotesIds.includes(noteId)
   }
-
-  const COLUMNS = 4
-
-  const NOTES_BY_COLUMN = Array.from({ length: COLUMNS }, (_, i) => {
-    return notes.filter((_, j) => j % COLUMNS === i)
-  })
+  
+  const NOTES_BY_COLUMN = useMemo(() => partitionByColumns(notes, columns), [notes, columns]);
 
   const getNoteTypeColor = (type: string) => {
     return NOTES_TYPES[type as keyof typeof NOTES_TYPES]?.color
   }
 
   return (
-    <ul class='flex items-start gap-5 p-1'>
+    <ul class='flex items-start gap-5'>
       {
         NOTES_BY_COLUMN.map(notes => (
           <li data-column class='w-[-webkit-fill-available]'>
@@ -51,7 +51,7 @@ export default function NoteList() {
                     <h2 class='font-bold'>{note.title}</h2>
                     <p class='text-sm'>{note.content}</p>
                     <footer>
-                      <span>📅 {getRTF(note.date)}</span>
+                      <small class='text-sm flex items-center gap-1'><span class='select-none'>📅</span><span class='opacity-75'>{getRTF(note.date)}</span></small>
                     </footer>
                   </article>
                 </li>
