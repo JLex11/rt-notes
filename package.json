@@ -11,14 +11,17 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "0.9.4",
-		"@astrojs/preact": "^3.5.3",
-		"@astrojs/tailwind": "5.1.2",
-		"@nanostores/preact": "^0.5.2",
-		"astro": "4.16.7",
+		"@astrojs/react": "^4.3.0",
+		"@astrojs/tailwind": "6.0.2",
+		"@nanostores/react": "^1.0.0",
+		"@types/react": "^19.1.7",
+		"@types/react-dom": "^19.1.6",
+		"astro": "5.9.2",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.0.3",
 		"nanostores": "^0.11.3",
-		"preact": "^10.24.3",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0",
 		"tailwind-merge": "^2.5.4"
 	},
 	"devDependencies": {
