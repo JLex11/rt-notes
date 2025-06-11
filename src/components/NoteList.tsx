@@ -8,6 +8,7 @@ import cn from '../utils/cn'
 // import { partitionByColumns } from '../utils/helpers'
 import { normalizeText } from '../utils/normalizeText'
 import { getRTF } from '../utils/rtf'
+import NoteContentRenderer, { extractTextFromYooptaContent } from './NoteContentRenderer'
 
 export default function NoteList() {
 	const notes = useStore(notesStore)
@@ -22,7 +23,7 @@ export default function NoteList() {
 					const type = notesFilters.type
 					const date = notesFilters.date
 
-					const noteSearchable = normalizeText(note.title + note.content)
+					const noteSearchable = normalizeText(`${note.title} ${extractTextFromYooptaContent(note.content)}`)
 
 					return (
 						noteSearchable.includes(search) &&
@@ -41,12 +42,12 @@ export default function NoteList() {
 	const getNoteTypeColor = (type: string) => NOTES_TYPES[type as keyof typeof NOTES_TYPES]?.color
 
 	return (
-		<ul className='columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5'>
+		<ul className='columns-1 sm:columns-1 md:columns-2 lg:columns-3 xl:columns-4 2xl:columns-5'>
 			{notes.map(note => (
 				<li key={note.id} className='mb-4 break-inside-avoid'>
 					<article
 						className={cn(
-							'flex flex-col p-4 rounded-2xl bg-gray-100 gap-4 shadow transition-all',
+							'flex flex-col p-4 rounded-2xl bg-gray-100 gap-1 shadow transition-all',
 							getNoteTypeColor(note.type),
 							isFiltered(note.id)
 								? 'opacity-20 pointer-events-none select-none'
@@ -54,7 +55,7 @@ export default function NoteList() {
 						)}
 					>
 						<h2 className='font-bold'>{note.title}</h2>
-						<p className='text-sm'>{note.content}</p>
+						<NoteContentRenderer content={note.content} />
 						<footer>
 							<small className='text-sm flex items-center gap-1'>
 								<span className='select-none'>📅</span>
