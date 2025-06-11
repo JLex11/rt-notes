@@ -1,30 +1,31 @@
-import { useStore } from '@nanostores/preact'
-import { useMemo } from 'preact/hooks'
+import { useStore } from '@nanostores/react'
+import { useMemo } from 'react'
 import { NOTES_TYPES } from '../consts'
-import useScreenColumns from '../hooks/useScreenColumns'
+// import useScreenColumns from '../hooks/useScreenColumns'
 import { notes as notesStore } from '../store/notes'
 import { noteFilters } from '../store/notesFilters'
 import cn from '../utils/cn'
-import { partitionByColumns } from '../utils/helpers'
+// import { partitionByColumns } from '../utils/helpers'
+import { normalizeText } from '../utils/normalizeText'
 import { getRTF } from '../utils/rtf'
 
 export default function NoteList() {
 	const notes = useStore(notesStore)
 	const notesFilters = useStore(noteFilters)
-	const columns = useScreenColumns({ initialColumns: 5 })
+	// const columns = useScreenColumns({ initialColumns: 5 })
 
 	const filteredNotesIds = useMemo(
 		() =>
 			notes
 				.filter(note => {
-					const search = notesFilters.search.toLowerCase()
+					const search = normalizeText(notesFilters.search)
 					const type = notesFilters.type
 					const date = notesFilters.date
 
-					const noteSearchable = note.title + note.content
+					const noteSearchable = normalizeText(note.title + note.content)
 
 					return (
-						noteSearchable.toLowerCase().includes(search) &&
+						noteSearchable.includes(search) &&
 						(type === null || note.type === type) &&
 						(date === null || note.date === date)
 					)
@@ -33,42 +34,34 @@ export default function NoteList() {
 		[notes, notesFilters]
 	)
 
-	const isFiltered = (noteId: number) => {
-		return !filteredNotesIds.includes(noteId)
-	}
+	const isFiltered = (noteId: number) => !filteredNotesIds.includes(noteId)
 
-	const NOTES_BY_COLUMN = useMemo(() => partitionByColumns(notes, columns), [notes, columns])
+	// const NOTES_BY_COLUMN = useMemo(() => partitionByColumns(notes, columns), [notes, columns])
 
-	const getNoteTypeColor = (type: string) => {
-		return NOTES_TYPES[type as keyof typeof NOTES_TYPES]?.color
-	}
+	const getNoteTypeColor = (type: string) => NOTES_TYPES[type as keyof typeof NOTES_TYPES]?.color
 
 	return (
-		<ul class='flex items-start gap-5'>
-			{NOTES_BY_COLUMN.map(({ columnId, items }) => (
-				<li data-column class='w-[-webkit-fill-available]' key={columnId}>
-					<ul data-row class='flex flex-col gap-5 items-start'>
-						{items.map(note => (
-							<li key={note.id}>
-								<article
-									class={cn(
-										'flex flex-col p-4 rounded-2xl bg-gray-100 gap-4 shadow transition-opacity',
-										getNoteTypeColor(note.type),
-										isFiltered(note.id) && 'opacity-20'
-									)}
-								>
-									<h2 class='font-bold'>{note.title}</h2>
-									<p class='text-sm'>{note.content}</p>
-									<footer>
-										<small class='text-sm flex items-center gap-1'>
-											<span class='select-none'>📅</span>
-											<span class='opacity-75'>{getRTF(note.date)}</span>
-										</small>
-									</footer>
-								</article>
-							</li>
-						))}
-					</ul>
+		<ul className='columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5'>
+			{notes.map(note => (
+				<li key={note.id} className='mb-4 break-inside-avoid'>
+					<article
+						className={cn(
+							'flex flex-col p-4 rounded-2xl bg-gray-100 gap-4 shadow transition-all',
+							getNoteTypeColor(note.type),
+							isFiltered(note.id)
+								? 'opacity-20 pointer-events-none select-none'
+								: notesFilters.activeFilters && 'transform-gpu -translate-0.5'
+						)}
+					>
+						<h2 className='font-bold'>{note.title}</h2>
+						<p className='text-sm'>{note.content}</p>
+						<footer>
+							<small className='text-sm flex items-center gap-1'>
+								<span className='select-none'>📅</span>
+								<span className='opacity-75'>{getRTF(note.date)}</span>
+							</small>
+						</footer>
+					</article>
 				</li>
 			))}
 		</ul>
