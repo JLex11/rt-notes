@@ -7,7 +7,7 @@ import {
 	CommandList,
 	CommandSeparator,
 } from 'cmdk'
-import { useEffect, useState } from 'preact/hooks'
+import { useEffect, useState } from 'react'
 
 export default function CommandMenu() {
 	const [open, setOpen] = useState(false)
@@ -21,7 +21,7 @@ export default function CommandMenu() {
 			}
 		}
 
-		document.addEventListener('keydown', down)
+		document.addEventListener('keydown', down)													
 		return () => document.removeEventListener('keydown', down)
 	}, [])
 
