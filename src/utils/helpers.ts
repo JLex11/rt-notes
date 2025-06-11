@@ -16,3 +16,11 @@ export function partitionByColumns<T>(items: T[], columns: number): { columnId: 
 
 	return result
 }
+
+/**
+ * Genera un ID único para elementos de Yoopta-Editor
+ * @returns Un string único
+ */
+export function generateId(): string {
+	return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+}
