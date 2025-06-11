@@ -12,21 +12,22 @@
 	"dependencies": {
 		"@astrojs/check": "0.9.4",
 		"@astrojs/react": "^4.3.0",
-		"@astrojs/tailwind": "6.0.2",
 		"@nanostores/react": "^1.0.0",
+		"@tailwindcss/vite": "^4.1.8",
 		"@types/react": "^19.1.7",
 		"@types/react-dom": "^19.1.6",
 		"astro": "5.9.2",
+		"biome": "^0.3.3",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.0.3",
 		"nanostores": "^0.11.3",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
+		"react": "^0.0.0-experimental-b6c0aa88-20250609",
+		"react-dom": "^0.0.0-experimental-b6c0aa88-20250609",
 		"tailwind-merge": "^2.5.4"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"tailwindcss": "^3.4.14",
+		"tailwindcss": "^4.1.8",
 		"typescript": "^5.6.3"
 	}
 }
