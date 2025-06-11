@@ -5,17 +5,15 @@ const dates = generateDates()
 ---
 
 <ul
-  class='flex sm:gap-5 gap-3 justify-between overflow-x-auto hide-scrollbar p-1 sm:py-4 py-6'
+  class='flex sm:gap-4 gap-2 justify-between overflow-x-auto hide-scrollbar p-1 sm:py-4 py-6'
   data-target='date-filter-list'
 >
   {
     dates.map(({ day, date, month, active }) => (
       <li>
         <article
-          class:list={[
-            'border border-gray-200 flex flex-col sm:flex-row items-center gap-2 p-3 rounded-3xl hover:shadow-lg shadow hover:bg-black/5 transition-all select-none',
-            active && 'bg-blue-700 text-white hover:bg-blue-800',
-          ]}
+          data-active={active}
+          class='border border-gray-200 flex flex-col sm:flex-row items-center gap-2 p-3 rounded-3xl shadow transition-all select-none hover:shadow-lg hover:bg-black/5 data-[active=true]:bg-blue-700 data-[active=true]:text-white data-[active=true]:hover:bg-blue-800'
         >
           <span class='text-sm'>{day}</span>
           <span class='font-bold text-5xl'>{date}</span>
