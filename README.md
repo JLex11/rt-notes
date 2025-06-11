@@ -1,129 +1,176 @@
-# RT Notes
+# RT Notes 📝
 
-![Project Logo](path/to/your/logo.png)
+Una aplicación moderna y eficiente para gestionar notas, recordatorios y tareas. Construida con **Astro**, **React**, **Tailwind CSS** y **TypeScript**.
 
-RT Notes es una aplicación para gestionar notas, recordatorios y tareas. Está construida con Astro, Preact y Tailwind CSS.
+## ✨ Características
 
-## Estructura del Proyecto
+- 🚀 **Ultra rápido** - Construido con Astro para máximo rendimiento
+- 🔍 **Búsqueda avanzada** - Menú de comandos con atajos de teclado (Ctrl/Cmd + K)
+- 🏷️ **Filtros inteligentes** - Filtra notas por fecha, tipo y contenido
+- 📱 **Diseño responsivo** - Optimizado para escritorio y móvil
+- 🎨 **Interfaz moderna** - Diseño limpio con Tailwind CSS
+- ⚡ **Gestión de estado** - Powered by Nanostores
+- 📊 **Vista en columnas** - Visualización adaptativa según el tamaño de pantalla
+
+## 🛠️ Stack Tecnológico
+
+- **[Astro](https://astro.build/)** - Framework web moderno para sitios rápidos
+- **[React](https://react.dev/)** - Biblioteca para interfaces de usuario interactivas
+- **[TypeScript](https://www.typescriptlang.org/)** - JavaScript con tipado estático
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utility-first
+- **[Nanostores](https://github.com/nanostores/nanostores)** - Gestión de estado minimalista
+- **[CMDK](https://cmdk.paco.me/)** - Menú de comandos elegante
+- **[Biome](https://biomejs.dev/)** - Linter y formateador ultrarrápido
+
+## 📁 Estructura del Proyecto
 
 ```plaintext
-.
-├── .astro/
-│   ├── settings.json
-│   ├── types.d.ts
-├── .gitignore
-├── .idea/
-│   ├── .gitignore
-│   ├── modules.xml
-│   ├── rt-notes.iml
-│   ├── vcs.xml
-│   ├── workspace.xml
-├── .vscode/
-│   ├── extensions.json
-│   ├── launch.json
-│   ├── settings.json
-├── astro.config.mjs
-├── biome.json
-├── bun.lockb
-├── package.json
-├── public/
-├── README.md
+rt-notes/
 ├── src/
-│   ├── components/
-│   │   ├── CommandMenu.tsx
-│   │   ├── DateFilterList.astro
-│   │   ├── FilterBar.astro
-│   │   ├── NoteList.tsx
-│   ├── consts.ts
-│   ├── env.d.ts
-│   ├── hooks/
-│   │   ├── useScreenColumns.ts
-│   ├── icons/
-│   │   ├── FilterIcon.astro
-│   ├── layouts/
-│   │   ├── Layout.astro
-│   ├── mocks/
-│   │   ├── notes.ts
-│   ├── pages/
-│   │   ├── index.astro
-│   ├── store/
-│   │   ├── notes.ts
-│   │   ├── notesFilters.ts
-│   ├── utils/
-│   │   ├── calendarDates.ts
-│   │   ├── cn.ts
-│   │   ├── helpers.ts
-│   │   ├── horizontalScroll.ts
-│   │   ├── rtf.ts
-│   ├── types.d.ts
-│   ├── noteContentMock.ts
-│   ├── noteTypes.ts
-├── tailwind.config.mjs
-├── tsconfig.json
+│   ├── components/          # Componentes React/Astro
+│   │   ├── CommandMenu.tsx  # Menú de comandos global
+│   │   ├── NoteList.tsx     # Lista de notas con grid responsivo
+│   │   ├── FilterBar.astro  # Barra de filtros
+│   │   └── ...
+│   ├── store/               # Estado global (Nanostores)
+│   │   ├── notes.ts         # Store de notas
+│   │   └── notesFilters.ts  # Store de filtros
+│   ├── utils/               # Utilidades y helpers
+│   ├── hooks/               # React hooks personalizados
+│   ├── types/               # Definiciones de tipos TypeScript
+│   └── pages/               # Páginas de Astro
+├── public/                  # Archivos estáticos
+└── ...
 ```
 
-## Instalación
+## 🚀 Instalación y Configuración
 
-1. Clona el repositorio:
-  
-  ```bash
-  git clone https://github.com/tu-usuario/rt-notes.git
-  ```
+### Requisitos previos
+- [Bun](https://bun.sh/) (recomendado) o [Node.js](https://nodejs.org/) 18+
 
-2. Navega al directorio del proyecto:
-  
-  ```bash
-  cd rt-notes
-  ```
+### Pasos de instalación
 
-3. Instala las dependencias:
-  
-  ```bash
-  bun install
-  ```
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/tu-usuario/rt-notes.git
+   cd rt-notes
+   ```
 
+2. **Instala las dependencias:**
+   ```bash
+   bun install
+   ```
 
-## Scripts Disponibles
+3. **Inicia el servidor de desarrollo:**
+   ```bash
+   bun dev
+   ```
 
-- `dev`: Inicia el servidor de desarrollo.
+4. **¡Listo!** Abre tu navegador en `http://localhost:4321`
 
-  ```bash
-  bun dev
-  ```
+## 📋 Scripts Disponibles
 
-- `build`: Compila el proyecto para producción.
-  
-  ```bash
-  bun build
-  ```
+| Script | Descripción |
+|--------|-------------|
+| `bun dev` | Inicia el servidor de desarrollo |
+| `bun build` | Compila el proyecto para producción |
+| `bun preview` | Previsualiza la build de producción |
+| `bun astro` | Ejecuta comandos de Astro CLI |
+## 🎯 Uso
 
-- `preview`: Previsualiza la compilación de producción.
+### Comandos de teclado
+- **Ctrl/Cmd + K** - Abre el menú de comandos global
+- **Escape** - Cierra modales y menús
 
-  ```bash
-  bun preview
-  ```
-## Uso
+### Componentes principales
 
-Para iniciar la aplicación en modo desarrollo, ejecuta:
-  
-  ```bash
-  bun dev
-  ```
-Luego, abre tu navegador y navega a `http://localhost:3000`
+#### 🔍 CommandMenu
+Menú de comandos global accesible desde cualquier parte de la aplicación.
+```tsx
+// Activa con Ctrl/Cmd + K
+<CommandMenu />
+```
 
-## Estructura de Componentes
-- **DateFilterList**: Componente para filtrar notas por fecha.
-- **FilterBar**: Barra de filtros para las notas.
-- **NoteList**: Lista de notas, renderizada en columnas.
-- **NotesTypeFilters**: Filtros por tipo de nota.
+#### 📋 NoteList
+Lista de notas con diseño responsivo en columnas que se adapta al tamaño de pantalla.
 
-## Configuración de Tailwind CSS
-El archivo de configuración de Tailwind CSS se encuentra en `tailwind.config.mjs` y está configurado para escanear todos los archivos en src con las extensiones `.astro`, `.html`, `.js`, `.jsx`, `.md`, `.mdx`, `.svelte`, `.ts`, `.tsx`, y `.vue`.
+#### 🏷️ FilterBar
+Sistema de filtros para organizar y encontrar notas por:
+- Fecha de creación
+- Tipo de nota
+- Contenido de texto
 
-## Contribuciones
-Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request para discutir cualquier cambio que desees realizar.
+#### 📅 DateFilterList
+Filtro específico por rangos de fechas con navegación intuitiva.
 
-## Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+## ⚙️ Configuración
 
-(Project Screenshot)
+### Tailwind CSS
+El proyecto utiliza Tailwind CSS v4 con configuración optimizada:
+```javascript
+// tailwind.config.mjs
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
+  // Configuración personalizada...
+}
+```
+
+### TypeScript
+Configuración estricta de TypeScript para mejor desarrollo:
+- Tipado fuerte en toda la aplicación
+- Definiciones de tipos personalizadas en `src/types/`
+- Soporte completo para JSX/TSX
+
+### Estado Global
+Gestión de estado con Nanostores:
+```typescript
+// stores/notes.ts - Estado de notas
+// stores/notesFilters.ts - Estado de filtros
+```
+
+## 🤝 Contribuir
+
+¡Las contribuciones son bienvenidas! Para contribuir:
+
+1. **Fork** el proyecto
+2. **Crea** una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
+3. **Commit** tus cambios (`git commit -m 'Añade nueva funcionalidad'`)
+4. **Push** a la rama (`git push origin feature/nueva-funcionalidad`)
+5. **Abre** un Pull Request
+
+### Desarrollo
+
+```bash
+# Clonar y configurar
+git clone https://github.com/tu-usuario/rt-notes.git
+cd rt-notes
+bun install
+
+# Desarrollo
+bun dev          # Servidor de desarrollo
+bun build        # Build de producción
+bun preview      # Preview de la build
+
+# Linting y formato
+bunx biome check --apply  # Auto-fix de formato y linting
+```
+
+## 📄 Licencia
+
+Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## 🎨 Screenshots
+
+> 📸 *Próximamente: capturas de pantalla de la aplicación*
+
+---
+
+<div align="center">
+
+**RT Notes** - Gestión de notas moderna y eficiente
+
+Construido con ❤️ usando Astro, React y Tailwind CSS
+
+⭐ **¡No olvides dar una estrella si te gustó el proyecto!** ⭐
+
+</div>
