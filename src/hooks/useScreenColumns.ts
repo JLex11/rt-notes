@@ -1,31 +1,65 @@
-import { useEffect, useState } from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState } from "react"
 
-export default function useScreenColumns({ initialColumns }: { initialColumns: number }) {
-	const [columns, setColumns] = useState(initialColumns)
+interface ScreenColumnsConfig {
+  [key: number]: number
+}
 
-	const COLUMNS_BY_SCREEN_WIDTH = {
-		640: 1,
-		768: 2,
-		1024: 3,
-		1280: 4,
-		1536: 5,
-	}
+interface UseScreenColumnsProps {
+  initialColumns?: number
+  breakpoints?: ScreenColumnsConfig
+  debounceMs?: number
+}
 
-	useEffect(() => {
-		const handleResize = () => {
-			const currentScreenWidth = (Object.keys(COLUMNS_BY_SCREEN_WIDTH).find(key => window.innerWidth < Number(key)) ||
-				1536) as keyof typeof COLUMNS_BY_SCREEN_WIDTH
-			const COLUMNS = COLUMNS_BY_SCREEN_WIDTH[currentScreenWidth]
-			setColumns(COLUMNS)
-		}
+export default function useScreenColumns({ 
+  initialColumns = 1,
+  breakpoints = {
+    640: 1,
+    768: 2,
+    1024: 3,
+    1280: 4,
+    1536: 5,
+  },
+  debounceMs = 150
+}: UseScreenColumnsProps = {}) {
+  const [columns, setColumns] = useState(initialColumns)
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined)
 
-		handleResize()
-		window.addEventListener('resize', handleResize)
+  const calculateColumns = useCallback((width: number): number => {
+    const sortedBreakpoints = Object.entries(breakpoints)
+      .map(([bp, cols]) => ({ breakpoint: Number(bp), columns: cols }))
+      .sort((a, b) => a.breakpoint - b.breakpoint)
 
-		return () => {
-			window.removeEventListener('resize', handleResize)
-		}
-	}, [])
+    for (const { breakpoint, columns: cols } of sortedBreakpoints) {
+      if (width < breakpoint) {
+        return cols
+      }
+    }
 
-	return columns
+    return sortedBreakpoints[sortedBreakpoints.length - 1].columns
+  }, [breakpoints])
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
+      timeoutRef.current = setTimeout(() => {
+        const newColumns = calculateColumns(window.innerWidth)
+        setColumns(newColumns)
+      }, debounceMs)
+    }
+
+    const initialCols = calculateColumns(window.innerWidth)
+    setColumns(initialCols)
+
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [calculateColumns, debounceMs])
+
+  return columns
 }
